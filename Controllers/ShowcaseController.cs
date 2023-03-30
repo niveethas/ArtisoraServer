@@ -21,7 +21,7 @@ namespace ArtisoraServer.Controllers
             return showcase;
         }
 
-        [HttpGet("/showcases/new")]
+        [HttpPost("/showcases/new")]
         public async Task<IActionResult> NewShowcase(ShowcaseDTO newSc)
         {
             try
