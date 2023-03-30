@@ -13,18 +13,21 @@ namespace ArtisoraServer.Controllers
             this._context = context;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetByID(string email)
+        //finding a login by email
+        [HttpGet("/user/password")]
+        public async Task<login> GetPasswordByEmail(string email)
         {
-            try
-            {
-                var currentLogin = await _context.Logins.FirstOrDefaultAsync(a => a.email.Equals(email));
-                return Ok(currentLogin);
-            }
-            catch
-            {
-                return BadRequest("Mentee couldn't be found");
-            }
+            var currentLogin = await _context.Logins.FirstOrDefaultAsync(a => a.email.Equals(email));
+            return currentLogin;
         }
+
+        //return a role by email
+        [HttpGet("/user/role")]
+        public async Task<int> GetRoleByEmail(string email)
+        {
+            var currentRole = await _context.Logins.FirstOrDefaultAsync(a => a.email.Equals(email));
+            return currentRole.role;
+        }
+
     }
 }

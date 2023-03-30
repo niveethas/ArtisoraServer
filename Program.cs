@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDBContext>();
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+builder.Services.AddCors(p => p.AddPolicy("myCors", builder =>
 {
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseCors("corsapp");
+app.UseCors("myCors");
 
 app.MapControllers();
 
