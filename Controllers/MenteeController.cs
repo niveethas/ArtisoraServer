@@ -44,19 +44,25 @@ namespace ArtisoraServer.Controllers
 
         //registering a new mentee
         [HttpPost("/mentee/new")]
-        public async Task<IActionResult> NewMentee(MenteeDTO newM, login newL)
+        public async Task<IActionResult> NewMentee(UserRegDTO newM)
         {
             try
             {
-                // _context.Add(newM);
                 var mentee = new mentee
                 {
                     firstName = newM.firstName,
                     lastName = newM.lastName,
                     email = newM.email
+
+                };
+                var login = new login
+                {
+                    email = newM.email,
+                    password = newM.password,
+                    role = newM.role
                 };
                 _context.Mentees.Add(mentee);
-                _context.Logins.Add(newL);
+                _context.Logins.Add(login);
                 await _context.SaveChangesAsync();
                 return Ok(newM.email);
             }
