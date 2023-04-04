@@ -17,8 +17,15 @@ namespace ArtisoraServer.Controllers
         [HttpGet("/user/password")]
         public async Task<string> GetPasswordByEmail(string email)
         {
-            var currentLogin = await _context.Logins.FirstOrDefaultAsync(a => a.email.Equals(email));
-            return currentLogin.password;
+            try
+            {
+                var currentLogin = await _context.Logins.FirstOrDefaultAsync(a => a.email.Equals(email));
+                return currentLogin.password;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         //return a role by email
