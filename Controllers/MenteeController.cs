@@ -1,5 +1,7 @@
 ﻿
 using ArtisoraServer.DTOs;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,11 +12,15 @@ namespace ArtisoraServer.Controllers
     public class MenteeController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
-        public MenteeController(ApplicationDBContext context)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public MenteeController(ApplicationDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             this._context = context;
+            _hostingEnvironment = webHostEnvironment;
         }
 
+        
 
         //returns all mentees
         [HttpGet("/all")]
@@ -41,7 +47,9 @@ namespace ArtisoraServer.Controllers
             return currentMentor.menteeId;
         }
 
-
+        /// <summary>
+        /// register a new new mentee
+        /// </summary>
         //registering a new mentee
         [HttpPost("/mentee/new")]
         public async Task<IActionResult> NewMentee(UserRegDTO newM)
@@ -121,5 +129,28 @@ namespace ArtisoraServer.Controllers
             }
         }
 
+        [HttpPost("/image/upload")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            try
+            {
+                //var pathName = Path.Combine(_hostingEnvironment.ContentRootPath, "Images");
+                var pathName = "C:\\Users\\nivee\\Desktop\\FYP\\ArtisoraWebsite\\wwwroot\\WorkImages\\";
+                string filePath = Path.Combine(pathName, file.FileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    file.CopyTo(fileStream);
+                }
+                
+                return StatusCode(200, file.FileName);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
     }
+
+    
 }
