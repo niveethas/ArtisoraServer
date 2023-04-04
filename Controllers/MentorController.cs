@@ -12,6 +12,14 @@ namespace ArtisoraServer.Controllers
             this._context = context;
         }
 
+        [HttpGet("/mentor/all")]
+        public async Task<List<mentor>> GetByAll()
+        {
+            var allMentors = await _context.Mentors.ToListAsync();
+            return allMentors;
+        }
+
+
         //check mentor email exists
         [HttpGet("/mentor")]
         public async Task<mentor> GetByEmail(string email)
