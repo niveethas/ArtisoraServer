@@ -72,13 +72,13 @@ namespace ArtisoraServer.Controllers
         [HttpGet("/mentorships")]
         public async Task<List<mentorship>> GetAllByID (int id)
         {
-            var mentorships = await _context.Mentorships.Where(x => x.mentorshipId == id).ToListAsync();
+            var mentorships = await _context.Mentorships.Where(x => x.mentorId == id).ToListAsync();
             return mentorships;
         }
 
         //create new mentorship 
         [HttpPost("/mentorships/new")]
-        public async Task<IActionResult> NewMentorship(mentorshipDTO newMs, login newL)
+        public async Task<IActionResult> NewMentorship(mentorshipDTO newMs)
         {
             try
             {
@@ -89,7 +89,6 @@ namespace ArtisoraServer.Controllers
                 };
                 
                 _context.Mentorships.Add(mentorship);
-                _context.Logins.Add(newL);
                 await _context.SaveChangesAsync();
                 return Ok();
             }
