@@ -14,6 +14,7 @@ namespace ArtisoraServer.Controllers
         private readonly ApplicationDBContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
+
         public MenteeController(ApplicationDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             this._context = context;
@@ -100,10 +101,9 @@ namespace ArtisoraServer.Controllers
 
         //get all images by menteeid
         [HttpGet("/images")]
-        public async Task<List<image>> GetIByID(int id)
+        public async Task<IEnumerable<image>> GetIByID(int id)
         {
-            var menteeImages = await _context.Images.Where(x => x.menteeId == id).ToListAsync();
-            return menteeImages;
+           return await _context.Images.Where(x => x.menteeId == id).ToListAsync();
 
         }
 
@@ -130,6 +130,7 @@ namespace ArtisoraServer.Controllers
         }
 
         [HttpPost("/image/upload")]
+        //following method has been derived from https://www.radzen.com/documentation/blazor/upload/
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
             try
