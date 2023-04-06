@@ -15,12 +15,19 @@ namespace ArtisoraServer.Controllers
         }
 
         //messages by mentorshipid
-        [HttpGet("/messages")]
+        [HttpGet("/messages/mentorship")]
         public async Task<List<message>> GetMessageByID(int id)
         {
             var message = await _context.Messages.Where(x => x.mentorshipId == id).ToListAsync();
             return message;
 
+        }
+
+        //return all the messages for an image
+        [HttpGet("/messages")]
+        public async Task<List<message>> GetMessageByImage(int id)
+        {
+            return await _context.Messages.Where(x => x.imageId == id).ToListAsync();
         }
 
         //new message
@@ -32,7 +39,9 @@ namespace ArtisoraServer.Controllers
                 var message = new message
                 {
                     mentorshipId = newMsg.mentorshipId,
-                    textContent = newMsg.textContent
+                    textContent = newMsg.textContent,
+                    imageId = newMsg.imageId
+
                 };
                 _context.Messages.Add(message);
                 await _context.SaveChangesAsync();

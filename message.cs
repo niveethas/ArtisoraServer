@@ -10,7 +10,8 @@ namespace ArtisoraServer
     {
         public int messageId { get;set; }
         public int mentorshipId { get;set; }
-        public string textContent { get;set; }  
+        public string textContent { get;set; } 
+        public int imageId { get;set; }
 
     }
 }
