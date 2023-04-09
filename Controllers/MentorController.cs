@@ -98,6 +98,12 @@ namespace ArtisoraServer.Controllers
             }
         }
 
-        
+        //get images by mentorship id
+        [HttpGet("/images/mentorshipid")]
+        public async Task<IEnumerable<image>> GetIByMs(int mentorshipId)
+        {
+            return await _context.Images.Where(x => x.mentorshipId == mentorshipId).ToListAsync();
+
+        }
     }
 }
