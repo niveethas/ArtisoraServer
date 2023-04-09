@@ -53,6 +53,13 @@ namespace ArtisoraServer.Controllers
             }
         }
 
+        //get image for relevant messages
+        [HttpGet ("/messages/imageid")]
+        public async Task<image> GetImage (int imageId)
+        {
+            return await _context.Images.FirstAsync(a => a.imageId == imageId);
+        }
+
 
     }
 }
