@@ -17,8 +17,7 @@ namespace ArtisoraServer.Controllers
         //get showcases by mentorId
         [HttpGet("/showcases")]
         public async Task<List<showcase>> GetShowcaseByID (int id){
-            var showcase = await _context.Showcases.Where(x => x.mentorId == id).ToListAsync();
-            return showcase;
+            return await _context.Showcases.Where(x => x.mentorId == id).ToListAsync();
         }
 
         [HttpPost("/showcases/new")]
