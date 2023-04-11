@@ -151,6 +151,21 @@ namespace ArtisoraServer.Controllers
             }
         }
 
+        [HttpDelete("/image/delete")]
+        public async Task<IActionResult> DeleteImage(int imageId)
+        {
+            try
+            {
+                var image = new image { imageId = imageId };
+                _context.Remove(image);
+                await _context.SaveChangesAsync();
+                return StatusCode(200, "File Deleted");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500,ex.Message);
+            }
+        }
     }
 
     
