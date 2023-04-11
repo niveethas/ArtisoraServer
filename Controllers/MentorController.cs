@@ -105,5 +105,27 @@ namespace ArtisoraServer.Controllers
             return await _context.Images.Where(x => x.mentorshipId == mentorshipId).ToListAsync();
 
         }
+
+        [HttpPost("/showcase/upload")]
+        //following method has been derived from https://www.radzen.com/documentation/blazor/upload/
+        public async Task<IActionResult> UploadShowcase(IFormFile file)
+        {
+            try
+            {
+                //var pathName = Path.Combine(_hostingEnvironment.ContentRootPath, "Images");
+                var pathName = "C:\\Users\\nivee\\Desktop\\FYP\\ArtisoraWebsite\\wwwroot\\ShowcaseImages\\";
+                string filePath = Path.Combine(pathName, file.FileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    file.CopyTo(fileStream);
+                }
+
+                return StatusCode(200, file.FileName);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
