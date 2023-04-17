@@ -85,8 +85,7 @@ namespace ArtisoraServer.Controllers
         [HttpGet("/mentorships/menteeid")]
         public async Task<mentorship> GetMsByID(int id)
         {
-            var currentMentorship = await _context.Mentorships.FirstAsync(x => x.menteeId == id);
-            return currentMentorship;
+            return await _context.Mentorships.FirstAsync(x => x.menteeId == id);
 
         }
         
