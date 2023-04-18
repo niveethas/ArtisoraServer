@@ -156,7 +156,12 @@ namespace ArtisoraServer.Controllers
             try
             {
                 var image = new image { imageId = imageId };
-                _context.Remove(image);
+                 _context.Images.Remove(image);
+                var mssgs = await _context.Messages.Where(x => x.imageId == imageId).ToListAsync();
+                foreach (var x in mssgs){
+                    _context.Remove(x);
+                }
+
                 await _context.SaveChangesAsync();
                 return StatusCode(200, "File Deleted");
             }
