@@ -33,7 +33,8 @@ namespace ArtisoraServer.Controllers
                   image1Caption = newSc.image1Caption,
                   image2Caption = newSc.image2Caption,
                   image3Caption = newSc.image3Caption,
-                  selfDescription = newSc.selfDescription
+                  selfDescription = newSc.selfDescription,
+                  mentorId = newSc.mentorId
                 };
                 _context.Showcases.Add(showcase);
                 await _context.SaveChangesAsync();
