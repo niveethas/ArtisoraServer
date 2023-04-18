@@ -78,7 +78,7 @@ namespace ArtisoraServer.Controllers
 
         //create new mentorship 
         [HttpPost("/mentorships/new")]
-        public async Task<IActionResult> NewMentorship(mentorshipDTO newMs)
+        public async Task<IActionResult> NewMentorship(MentorshipDTO newMs)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace ArtisoraServer.Controllers
             }
             catch
             {
-                return BadRequest("Sign up has failed.");
+                return BadRequest("New mentorship failed to save.");
             }
         }
 
