@@ -150,6 +150,8 @@ namespace ArtisoraServer.Controllers
             }
         }
 
+        //Find the images to delete using the image id
+        //delete the corresponding message for the image
         [HttpDelete("/image/delete")]
         public async Task<IActionResult> DeleteImage(int imageId)
         {

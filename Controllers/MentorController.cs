@@ -112,7 +112,6 @@ namespace ArtisoraServer.Controllers
         {
             try
             {
-                //var pathName = Path.Combine(_hostingEnvironment.ContentRootPath, "Images");
                 var pathName = "C:\\Users\\nivee\\Desktop\\FYP\\ArtisoraWebsite\\wwwroot\\ShowcaseImages\\";
                 string filePath = Path.Combine(pathName, file.FileName);
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))

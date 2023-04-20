@@ -20,6 +20,7 @@ namespace ArtisoraServer.Controllers
             return await _context.Showcases.Where(x => x.mentorId == id).ToListAsync();
         }
 
+        //add new showcase
         [HttpPost("/showcases/new")]
         public async Task<IActionResult> NewShowcase(ShowcaseDTO newSc)
         {
